@@ -8,6 +8,10 @@ function navigateTo(url) {
 }
 
 async function router() {
+  const app = document.querySelector("#app");
+
+  // HARD teardown before route change
+  app.innerHTML = "";
   const routes = [
     { path: "/", view: Home, init: initHome },
     { path: "/detective-detail", view: DetectiveDetail },

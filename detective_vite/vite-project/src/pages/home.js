@@ -5,7 +5,7 @@ export default function Home() {
       <input type="text" id="searchInput" placeholder="Search detective..." />
       <button id="searchBtn">Go</button>
     </div>
-    <div class="photo-list" id="modules-container"></div>
+    <div id="modules-container"></div>
     <ul class="photo-list"></ul>
     <div id="profile-container"></div>
 
@@ -36,12 +36,16 @@ export default function Home() {
           <p id="modalIntro"></p>
         </div>
 
-        <p id="modalIntro"></p>
+      
         <a id="modalLink" href="/detective-detail" data-link>link</a>
       </div>
     </div>
    
-
+    <a id="homeBtn" class="hamburger" data-link href="/">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
   `;
 }
 //<script src="script.js" type="module"></script>

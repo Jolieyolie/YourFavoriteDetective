@@ -1,12 +1,12 @@
 import { Client, gql, cacheExchange, fetchExchange } from "@urql/core";
-// import {
-//   Client,
-//   gql,
-//   cacheExchange,
-//   fetchExchange,
-// } from "https://esm.sh/@urql/core";
+import fallbackProfile from "./asset/profile.jpg";
+
+let animationToken = 0;
 export function initHome() {
+  const container = document.getElementById("modules-container");
+  if (!container) return;
   async function loadDetectives() {
+    container.innerHTML = "";
     const client = new Client({
       url: "https://eu-west-2.cdn.hygraph.com/content/cmic8lwzx01e407w429wkjxja/master",
       exchanges: [cacheExchange, fetchExchange],
@@ -35,25 +35,37 @@ export function initHome() {
     `;
 
     const clientQueryResult = await client.query(DetectivesQuery);
-    console.log(clientQueryResult);
+    // console.log(clientQueryResult);
 
-    const list = document.querySelector(".photo-list");
+    // const list = document.querySelector(".photo-list");
     const detectives = clientQueryResult.data.detectives;
-    list.innerHTML = "";
 
-    const container = document.getElementById("modules-container");
+    console.log(detectives);
+    // list.innerHTML = "";
+
+    // const container = document.getElementById("modules-container");
 
     // Insert floating photos
     container.innerHTML = detectives
       .map(
         (d) => `
         <a class="floating-photo" data-id="${d.name}">
-          <img src="${d.profilePhoto.url}" alt="${d.name}">
+          <img src="${
+            d.profilePhoto && d.profilePhoto.url
+              ? d.profilePhoto.url
+              : fallbackProfile
+          }" alt="${d.name}">
           <div class="photo-title">${d.name}</div>
         </a>
       `
       )
       .join("");
+
+    setTimeout(() => {
+      initFloatingPhotos();
+      initDetectiveClick();
+      initSearch();
+    }, 50);
 
     function initDetectiveClick() {
       const photos = document.querySelectorAll(".floating-photo");
@@ -71,7 +83,10 @@ export function initHome() {
       const d = detectives.find((x) => x.name === id);
 
       // Fill modal content
-      document.getElementById("modalPhoto").src = d.profilePhoto.url;
+      document.getElementById("modalPhoto").src =
+        d.profilePhoto && d.profilePhoto.url
+          ? d.profilePhoto.url
+          : fallbackProfile;
       document.getElementById("modalName").innerText = d.name;
       document.getElementById("modalAge").innerText = d.age;
       document.getElementById("modalNationality").innerText = d.nationality;
@@ -92,9 +107,9 @@ export function initHome() {
       if (event.target === modal) modal.style.display = "none";
     };
 
-    initFloatingPhotos();
-    initDetectiveClick();
-    initSearch(); // must be last
+    // initFloatingPhotos();
+    // initDetectiveClick();
+    // initSearch(); // must be last
   }
 
   // --------------------- SEARCH SYSTEM ---------------------
@@ -175,7 +190,8 @@ export function initHome() {
   }
   // --------------------- FLOATING SYSTEM ---------------------
   function initFloatingPhotos() {
-    const SIZE = 150;
+    const token = ++animationToken;
+    const SIZE = 110;
     const items = [...document.querySelectorAll(".floating-photo")];
 
     const W = window.innerWidth;
@@ -197,6 +213,7 @@ export function initHome() {
     });
 
     function animate() {
+      if (token !== animationToken) return;
       bubbles.forEach((b) => {
         // Skip frozen/highlighted elements
         if (b.el.classList.contains("frozen")) return;

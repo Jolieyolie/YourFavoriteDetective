@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -93,7 +93,7 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -102,18 +102,26 @@ html,
 body {
   height: 100%;
   margin: 0;
+  padding: 0;
   overflow: hidden;
+  overflow-x: hidden;
 }
 
 body {
-  height: 100vh;
+  /* height: 100vh; */
   background-color: #111;
   font-family: sans-serif;
   color: white;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   position: relative;
+}
+
+#app {
+  position: relative; /* so absolute children align inside #app */
+  width: 100%;
+  height: 100vh;
 }
 
 .title-background {
@@ -121,7 +129,7 @@ body {
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: clamp(4rem, 12vw, 10rem);
+  font-size: clamp(4rem, 10vw, 9rem);
   font-weight: bold;
   color: #0ff; /* very light, subtle */
   letter-spacing: 0.5rem;
@@ -143,6 +151,30 @@ body {
   display: flex;
   align-items: right;
   gap: 8px;
+}
+
+.hamburger {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  width: 36px;
+  height: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: #0ff;
+  border-radius: 2px;
+  box-shadow: 0 0 6px #0ff;
 }
 
 .search-bar input {
@@ -179,7 +211,7 @@ body {
 }
 .floating-photo.highlighted {
   z-index: 9999;
-  transform: scale(1.4) !important; /* larger */
+  transform: scale(1.25) !important; /* larger */
   transition: transform 0.3s ease;
 }
 
@@ -191,16 +223,17 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh; /* or full document height */
+  overflow: hidden;
 }
 .floating-photo {
-  position: fixed; /* floats relative to viewport */
-  width: 150px;
-  height: 150px;
+  position: absolute; /* floats relative to viewport */
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
-  overflow: visible;
+  /* overflow: visible; */
   cursor: pointer;
   z-index: 5;
-  transition: transform 0.3s;
+  transition: transform 0.25s;
   border: 2px solid rgb(235, 131, 21);
   padding: 0;
   margin: 0;
@@ -222,8 +255,6 @@ body {
 }
 
 .highlighted {
-  width: 220px !important;
-  height: 220px !important;
   z-index: 5000 !important;
   transform: none !important;
 }
