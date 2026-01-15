@@ -61,11 +61,129 @@ export function initHome() {
       )
       .join("");
 
-    setTimeout(() => {
+      setTimeout(() => {
       initFloatingPhotos();
       initDetectiveClick();
       initSearch();
+      initHamburgerMenu(); 
+      initAddDetectiveForm();
     }, 50);
+// --------------------- add Form ---------------------
+    function initAddDetectiveForm() {
+      const form = document.getElementById("addDetectiveForm");
+      if (!form) return;
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+
+        const data = Object.fromEntries(new FormData(form));
+        console.log("Submitting detective:", {
+          name: data.name,
+          age: data.age,
+          nationality: data.nationality,
+          introduction: data.introduction,
+          appearingInMedia: data.appearingInMedia
+        });
+        try {
+              const res = await fetch("http://localhost:3001/api/create-detective", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  name: data.name,
+                  age: Number(data.age),
+                  nationality: data.nationality,
+                  introduction: data.introduction,
+                  appearingInMedia: data.appearingInMedia,
+                }),
+              });
+
+              const result = await res.json();
+
+              if (!res.ok) {
+                console.error("Create error:", result);
+                alert("Failed to create detective");
+                return;
+              }
+
+              // close modal
+              document.getElementById("addDetectiveModal").style.display = "none";
+              form.reset();
+
+              // reload detectives
+              loadDetectives();
+            } catch (err) {
+              console.error("Network error:", err);
+              alert("Server error");
+            }
+          };
+        }
+        // try {
+        //   const mutation = gql`
+        //     mutation AddDetective(
+        //       $name: String!
+        //       $age: String!
+        //       $nationality: String
+        //       $introduction: String!
+        //       $appearingInMedia: String
+        //     ) {
+        //       createDetective(
+        //         data: {
+        //           name: $name
+        //           age: $age
+        //           nationality: $nationality
+        //           introduction: $introduction
+        //           appearingInMedia: $appearingInMedia
+        //         }
+        //       ) {
+        //         id
+        //       }
+        //     }
+        //   `;
+
+        //   const createResult = await client
+        //     .mutation(mutation, {
+        //       name: data.name || "",
+        //       age: data.age || "",
+        //       nationality: data.nationality || "",
+        //       introduction: data.introduction || "",
+        //       appearingInMedia: data.appearingInMedia || "",
+        //     })
+        //     .toPromise();
+
+        //   if (createResult.error) {
+        //     console.error("Create error:", createResult.error);
+        //     alert("Failed to create detective. Check console.");
+        //     return;
+        //   }
+
+        //   const detectiveId = createResult.data.createDetective.id;
+
+        //   // PUBLISH USING ID
+        //   const publishMutation = gql`
+        //     mutation PublishDetective($id: ID!) {
+        //       publishDetective(where: { id: $id }) {
+        //         id
+        //       }
+        //     }
+        //   `;
+
+        //   await client
+        //     .mutation(publishMutation, { id: detectiveId })
+        //     .toPromise();
+
+        //   // Only now close modal
+        //   document.getElementById("addDetectiveModal").style.display = "none";
+        //   form.reset();
+
+        //   // Reload detectives
+        //   loadDetectives();
+        // } catch (err) {
+        //   console.error("Unexpected error:", err);
+        //   alert("Unexpected error. See console.");
+        // }
+    //   };
+    // }
 
     function initDetectiveClick() {
       const photos = document.querySelectorAll(".floating-photo");
@@ -107,9 +225,6 @@ export function initHome() {
       if (event.target === modal) modal.style.display = "none";
     };
 
-    // initFloatingPhotos();
-    // initDetectiveClick();
-    // initSearch(); // must be last
   }
 
   // --------------------- SEARCH SYSTEM ---------------------
@@ -188,6 +303,32 @@ export function initHome() {
       }
     });
   }
+  // ---------------------Hamburger Menu ---------------------
+  function initHamburgerMenu() {
+    const burger = document.getElementById("hamburger");
+    const menu = document.getElementById("hamburgerMenu");
+    const addBtn = document.getElementById("addDetectiveBtn");
+    const modal = document.getElementById("addDetectiveModal");
+    const close = document.getElementById("closeAddModal");
+
+    burger.onclick = () => {
+      menu.classList.toggle("open");
+    };
+
+    addBtn.onclick = () => {
+      menu.classList.remove("open");
+      modal.style.display = "block";
+    };
+
+    close.onclick = () => {
+      modal.style.display = "none";
+    };
+
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+  }
+
   // --------------------- FLOATING SYSTEM ---------------------
   function initFloatingPhotos() {
     const token = ++animationToken;

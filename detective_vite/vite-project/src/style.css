@@ -153,7 +153,7 @@ body {
   gap: 8px;
 }
 
-.hamburger {
+/* .hamburger {
   position: fixed;
   top: 18px;
   left: 18px;
@@ -175,7 +175,7 @@ body {
   background: #0ff;
   border-radius: 2px;
   box-shadow: 0 0 6px #0ff;
-}
+} */
 
 .search-bar input {
   border-color: #0ff;
@@ -442,6 +442,49 @@ img {
 .modal-value {
   display: inline;
 }
+/* ===== HAMBURGER MENU FIX ===== */
+
+.hamburger-wrapper {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 3000; /* ABOVE floating photos */
+}
+
+.hamburger-menu {
+  position: absolute;
+  top: 42px;
+  left: 0;
+
+  background: #111;
+  border: 1px solid #0ff;
+  box-shadow: 0 0 12px #0ff;
+
+  padding: 10px 14px;
+  border-radius: 10px;
+
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hamburger-menu.open {
+  display: flex;
+}
+
+.hamburger-menu button {
+  background: transparent;
+  border: none;
+  color: #0ff;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.hamburger-menu button:hover {
+  text-shadow: 0 0 6px #0ff;
+}
+
 .footer {
   position: fixed; /* Stays fixed at the bottom */
   bottom: 0; /* Align to bottom */
