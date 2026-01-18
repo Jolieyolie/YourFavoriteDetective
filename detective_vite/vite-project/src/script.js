@@ -91,7 +91,7 @@ export function initHome() {
                 },
                 body: JSON.stringify({
                   name: data.name,
-                  age: Number(data.age),
+                  age: data.age,
                   nationality: data.nationality,
                   introduction: data.introduction,
                   appearingInMedia: data.appearingInMedia,
@@ -108,6 +108,7 @@ export function initHome() {
 
               // close modal
               document.getElementById("addDetectiveModal").style.display = "none";
+              console.log(result);
               form.reset();
 
               // reload detectives
