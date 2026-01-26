@@ -1,99 +1,3 @@
-/* :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
 
 * {
   box-sizing: border-box;
@@ -108,13 +12,9 @@ body {
 }
 
 body {
-  /* height: 100vh; */
   background-color: #111;
   font-family: sans-serif;
   color: white;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   position: relative;
 }
 
@@ -152,30 +52,6 @@ body {
   align-items: right;
   gap: 8px;
 }
-
-/* .hamburger {
-  position: fixed;
-  top: 18px;
-  left: 18px;
-  width: 36px;
-  height: 28px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 2000;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.hamburger span {
-  display: block;
-  height: 4px;
-  width: 100%;
-  background: #0ff;
-  border-radius: 2px;
-  box-shadow: 0 0 6px #0ff;
-} */
 
 .search-bar input {
   border-color: #0ff;
@@ -259,88 +135,12 @@ body {
   transform: none !important;
 }
 
-/* .photo-title {
-  display: block;
-  line-height: 1.1;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.55);
-  color: white;
-  text-align: center;
-  font-size: clamp(0.55rem, 2vw, 0.8rem);
 
-  padding: 6px 4px;
-
-  white-space: normal;
-  word-break: break-word;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 20%,
-    black 80%,
-    transparent
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 20%,
-    black 80%,
-    transparent
-  );
-} */
 
 .floating-photo:hover .photo-title {
   opacity: 1;
-  /* transform: translateY(0%); */
 }
 
-/* ul.photo-list {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap; 
-   gap: 20px; 
-   list-style: none;
-  padding: 0; 
-  margin: 40px;
-  margin: 0;
-  position: relative; 
-} 
- ul.photo-list li a {
-  display: flex;
-  width: 150px;
-  height: 150px;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-ul.photo-list li a:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  overflow: hidden;
-}
-ul.photo-list img {
-  width: 150px;
-  height: 150px;
-  border: 2px solid rgb(235, 131, 21);
-  border-radius: 50%;
-  object-fit: cover;
-  overflow: hidden;
-}
-img {
-  display: inline-block;
-  margin: 5px;
-  vertical-align: middle;
-}
-   ul.photo-list li a {
-  animation: float 4s ease-in-out infinite;
-} */
 @keyframes float {
   0%,
   100% {
@@ -484,6 +284,114 @@ img {
 .hamburger-menu button:hover {
   text-shadow: 0 0 6px #0ff;
 }
+
+/* ===============================
+   ADD DETECTIVE – LARGE SUBPAGE
+================================ */
+
+.add-detective-backdrop {
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9500;
+}
+
+/* BIG CENTERED PANEL */
+.add-detective-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  height: 88vh;
+  width: clamp(420px, 40vw, 720px);
+
+  background: #111;
+  color: white;
+
+  border-radius: 20px;
+  border: 2px solid #0ff;
+  box-shadow:
+    0 0 25px rgba(0, 255, 255, 0.45),
+    inset 0 0 25px rgba(0, 255, 255, 0.15);
+
+  padding: 32px 30px;
+  overflow-y: auto;
+}
+
+/* TITLE */
+.add-detective-panel h2 {
+  text-align: center;
+  margin-bottom: 28px;
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.2em;
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff;
+}
+
+/* FORM LAYOUT */
+#addDetectiveForm {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* INPUTS */
+#addDetectiveForm input,
+#addDetectiveForm textarea {
+  background: transparent;
+  border: 2px solid #0ff;
+  border-radius: 14px;
+
+  padding: 12px 14px;
+  color: white;
+  font-size: 1rem;
+
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+#addDetectiveForm textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+#addDetectiveForm input::placeholder,
+#addDetectiveForm textarea::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* CREATE BUTTON */
+#addDetectiveForm button {
+  margin-top: 16px;
+  align-self: center;
+
+  background: #0ff;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  padding: 12px 32px;
+  border-radius: 24px;
+  border: none;
+
+  cursor: pointer;
+  box-shadow: 0 0 22px #0ff;
+}
+
+#addDetectiveForm button:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 32px #0ff;
+}
+
+/* CLOSE BUTTON */
+.add-detective-panel .close {
+  position: sticky;
+  top: 0;
+  margin-left: auto;
+
+  font-size: 32px;
+  color: #0ff;
+  cursor: pointer;
+}
+
 
 .footer {
   position: fixed; /* Stays fixed at the bottom */

@@ -52,6 +52,14 @@ app.post("/api/create-detective", async (req, res) => {
       }
     `;
 
+    const publishMutation = `
+      mutation PublishDetective($id: ID!) {
+      publishDetective(where: { id: $id }) {
+      id
+        }
+      }
+    `;
+
     const variables = {
       name,
       age,
@@ -71,6 +79,26 @@ app.post("/api/create-detective", async (req, res) => {
     });
 
     const result = await response.json();
+
+    // Get the ID from the created detective
+    const detectiveId = result.data.createDetective.id;
+    // Publish the detective
+    const publishResponse = await fetch(HYGRAPH_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${HYGRAPH_MANAGEMENT_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: publishMutation,
+        variables: { id: detectiveId }
+      }),
+    });
+    const publishResult = await publishResponse.json();
+    if (publishResult.errors) {
+      console.error(publishResult.errors);
+      return res.status(400).json(publishResult);
+    }
 
     if (result.errors) {
       console.error(result.errors);
